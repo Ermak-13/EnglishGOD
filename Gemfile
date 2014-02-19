@@ -9,8 +9,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
+gem 'iconv'
+
 group :development, :test do
   gem 'rspec-rails'
+  gem 'debugger'
 end
 
 group :doc do
