@@ -5,10 +5,33 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
+  <title>English God</title>
 </head>
 <body>
+  <div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu">
+          <span class="sr-only">Toogle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="<%= root_path %>" class="navbar-brand">English God</a>
+      </div>
 
-<%= yield %>
+      <div id="main-menu" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://translation.google.com/">Google</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

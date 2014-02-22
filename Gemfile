@@ -10,9 +10,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'iconv'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+
   gem 'debugger'
 end
 
