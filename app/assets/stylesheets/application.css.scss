@@ -5,7 +5,7 @@
  @import 'bootstrap';
  @import 'bootstrap/theme';
 
-#translating-form button[type="submit"] {
+#translating-form input[type="submit"] {
   float: right;
 }
 
@@ -32,4 +32,8 @@
 
 #last-words {
   margin-top: 50px;
+}
+
+.temp {
+  color: red;
 }

@@ -1,83 +1,59 @@
-  <form id="translating-form" class="form-inline"role="form">
-    <div id="word-field" class="form-group">
-      <label class="sr-only" for="word-field-input">Word</label>
-      <input type="text" id="word-field-input" class="form-control" placeholder="Enter world" autofocus>
+  <%= form_for @form, url: translations_path,
+    html: {id: 'translating-form', class: 'form-inline', role: 'form'} do |f| %>
+
+    <div id="text-field" class="form-group">
+      <%= f.label :word, 'Word', class: 'sr-only', for: 'text-field-input' %>
+      <%= f.text_field :word, id: 'text-field-input', class: 'form-control',
+        placeholder: 'Enter world', autofocus: true %>
     </div>
-    <button type="submit" id="submit-form" class="btn btn-success">translate</button>
-  </form>
+    <%= f.submit 'translate', id: 'submit-form', class: 'btn btn-success' %>
+  <% end %>
 
   <div class="clearfix"></div>
 
-  <div id="translated-word" class="row">
-
-    <div class="col-md-4">
-      <div class="text-center">
-        <span class="big-text">мир</span>
+  <% if @translation %>
+    <div id="translated-word" class="row">
+      <div class="col-md-4">
+        <div class="text-center">
+          <span class="big-text"><%= @translation.value %></span>
+        </div>
       </div>
+
+      <% @translation.probable_values.each do |group_name, values| %>
+        <div id="context-examples" class="col-md-4">
+          <h4>
+            <strong><em><%= group_name %>:</em></strong>
+          </h4>
+          <ul>
+            <% values.each do |value| %>
+              <li><%= value %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- TODO -->
+      <div id="context-examples" class="col-md-4 temp">
+        <h4>
+          <strong><em>Context:</em></strong>
+        </h4>
+        <ul>
+          <li>I will destroy this world!</li>
+          <li>Hello world</li>
+        </ul>
+      </div>
+
     </div>
+  <% end %>
 
-    <div id="context-examples" class="col-md-4">
-      <h4>
-        <strong><em>Noun:</em></strong>
-      </h4>
-      <ul>
-        <li>мир (world, peace, universe, kigdom)</li>
-        <li>мир (world, peace, universe, kigdom)</li>
-        <li>мир (world, peace, universe, kigdom)</li>
-      </ul>
-    </div>
-
-    <div id="context-examples" class="col-md-4">
-      <h4>
-        <strong><em>Adjective:</em></strong>
-      </h4>
-      <ul>
-        <li>мировой (world, global, worldwide)</li>
-        <li>всемирный (world, worldwide, global)</li>
-      </ul>
-    </div>
-
-    <div id="context-examples" class="col-md-12">
-      <h4>
-        <strong><em>Context:</em></strong>
-      </h4>
-      <ul>
-        <li>I will destroy this world!</li>
-        <li>Hello world</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div id="last-words">
-    <table class="table table-hover">
-      <tr>
-        <th>#</th>
-        <th>Egnlish</th>
-        <th>Russian</th>
-        <th>Context</th>
-      </tr>
-      <tr class="success">
-        <td>999</td>
-        <td>world</td>
-        <td>мир</td>
-        <td>I will destroy world!</td>
-      </tr>
-      <tr>
-        <td>998</td>
-        <td>water</td>
-        <td>вода</td>
-        <td>I drank water!</td>
-      </tr>
-    </table>
-  </div>
+  <%= render partial: 'translations', locals: {dictionary: @dictionary} %>
 
   <script type="text/javascript">
     (function () {
       var $container = $('.container'),
           $form = $('#translating-form'),
 
-          $input = $form.find('#word-field-input'),
+          $input = $form.find('#text-field-input'),
           $submit = $form.find('.btn');
 
       var inputWidth = $container.width() - $submit.width() - 40;
