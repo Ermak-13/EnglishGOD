@@ -11,10 +11,13 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'iconv'
 gem 'bootstrap-sass'
+gem 'devise'
+gem 'omniauth'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'sextant'
 
   gem 'debugger'
 end
