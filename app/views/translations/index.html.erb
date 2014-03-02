@@ -2,8 +2,8 @@
     html: {id: 'translating-form', class: 'form-inline', role: 'form'} do |f| %>
 
     <div id="text-field" class="form-group">
-      <%= f.label :word, 'Word', class: 'sr-only', for: 'text-field-input' %>
-      <%= f.text_field :word, id: 'text-field-input', class: 'form-control',
+      <%= f.label :text, 'Text', class: 'sr-only', for: 'text-field-input' %>
+      <%= f.text_field :text, id: 'text-field-input', class: 'form-control',
         placeholder: 'Enter world', autofocus: true %>
     </div>
     <%= f.submit 'translate', id: 'submit-form', class: 'btn btn-success' %>
@@ -46,7 +46,7 @@
     </div>
   <% end %>
 
-  <%= render partial: 'translations', locals: {dictionary: @dictionary} %>
+  <%= render partial: 'translations', locals: {translations: @translations} %>
 
   <script type="text/javascript">
     (function () {

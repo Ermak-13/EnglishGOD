@@ -1,30 +1,19 @@
-class Dictionary < ActiveRecord::Base
-  validates :word, presence: true
-
-  def word=(word)
-    write_attribute(:word, word.downcase())
-  end
-
-  def translation()
-    JSON.parse(read_attribute(:translation) || '{}')
-  end
-
-  def translation=(translation)
-    write_attribute(:translation, JSON.dump(translation))
-  end
-
+class Dictionary
   def self.translate(text)
-    word = Dictionary.find_by_word(text.downcase())
-    if word
-      return word.translation
-    else
-      translation = self.google_translate(text)
+    translation = Translation.find_by_text(text.downcase())
 
-      if translation['dict']
-        Dictionary.create(word: text, translation: translation)
+    if not translation
+      value = self.google_translate(text)
+
+      if value['dict']
+        translation = Translation.create(text: text, value: value)
+      else
+        # not saving when translated few words
+        translation = Translation.new(text: text, value: value)
       end
-      return translation
     end
+
+    translation
   end
 
   def self.google_translate(text)

@@ -2,7 +2,7 @@ module ApplicationHelper
   def flash_html()
     converter = {
       alert: 'alert-danger',
-      notice: 'alert-success'
+      notice: 'alert-success',
     }
 
     flash_html = ''

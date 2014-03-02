@@ -27,8 +27,8 @@ EOF
         translit: 'mir'
       })
 
-      Dictionary.create(word: word, translation: translation)
-      Dictionary.count.should eq(1)
+      Translation.create(text: word, value: translation)
+      Translation.count.should eq(1)
     end
 
     it 'should be invalid' do
@@ -40,12 +40,12 @@ EOF
       })
 
       situations = [
-        {word: '', translation: translation},
+        {text: '', value: translation},
       ]
 
       situations.each do |attributes|
-        Dictionary.create(attributes)
-        Dictionary.count.should eq(0)
+        Translation.create(attributes)
+        Translation.count.should eq(0)
       end
     end
   end
@@ -60,9 +60,7 @@ EOF
       })
 
       Dictionary.stub(:google_translate) {translation}
-
-      Dictionary.translate(word).should eq(translation)
-      Dictionary.count.should eq(1)
+      Dictionary.translate(word).value.should eq(translation)
     end
 
     it 'translate cached word' do
@@ -74,10 +72,10 @@ EOF
       })
 
       Dictionary.stub(:google_translate) {raise 'should not be called'}
-      Dictionary.create(word: word, translation: translation)
+      Translation.create(text: word, value: translation)
 
-      Dictionary.translate(word).should eq(translation)
-      Dictionary.count.should eq(1)
+      Dictionary.translate(word).value.should eq(translation)
+      Translation.count.should eq(1)
     end
 
     it 'translate few words' do
@@ -90,7 +88,7 @@ EOF
       translation.delete('dict')
 
       Dictionary.stub(:google_translate) {translation}
-      Dictionary.translate(words).should eq(translation)
+      Dictionary.translate(words).value.should eq(translation)
     end
   end
 end
