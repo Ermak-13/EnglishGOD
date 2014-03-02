@@ -1,4 +1,6 @@
 class Translation < ActiveRecord::Base
+  has_and_belongs_to_many :users
+
   validates :text, presence: true
 
   def text=(text)

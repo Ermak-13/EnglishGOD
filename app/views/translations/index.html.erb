@@ -46,7 +46,13 @@
     </div>
   <% end %>
 
-  <%= render partial: 'translations', locals: {translations: @translations} %>
+  <% if user_signed_in? %>
+    <%= render partial: 'translations', locals: {translations: @translations} %>
+  <% else %>
+    <div id="info-for-unauthorized-user" class="alert alert-info">
+      You can save translated words if you are authorized.
+    </div>
+  <% end %>
 
   <script type="text/javascript">
     (function () {

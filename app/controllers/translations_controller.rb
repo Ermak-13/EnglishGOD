@@ -23,10 +23,18 @@ class TranslationsController < ApplicationController
     if text
       translation = Dictionary.translate(text)
       @translation = TranslationDecorator.new(translation)
+
+      if user_signed_in?
+        current_user.translations << translation
+        current_user.save()
+      end
     end
 
-    @translations = Translation.order('created_at DESC').limit(10).map do |translation|
-      TranslationDecorator.new(translation)
+    if user_signed_in?
+      translations = current_user.translations.order('created_at DESC').limit(10)
+      @translations = translations.map do |translation|
+        TranslationDecorator.new(translation)
+      end
     end
   end
 
