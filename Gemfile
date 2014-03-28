@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'sextant'
+  gem 'mailcatcher'
 
   gem 'debugger'
 end
