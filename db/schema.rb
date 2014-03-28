@@ -11,18 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302191701) do
+ActiveRecord::Schema.define(version: 20140328140100) do
+
+  create_table "dictionaries", force: true do |t|
+    t.integer "user_id"
+  end
+
+  create_table "knowledges", force: true do |t|
+    t.integer  "translation_id"
+    t.integer  "user_id"
+    t.integer  "rating"
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "dictionary_id"
+  end
 
   create_table "translations", force: true do |t|
     t.string   "text"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "translations_users", id: false, force: true do |t|
-    t.integer "translation_id"
-    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|
