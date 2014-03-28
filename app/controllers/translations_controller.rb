@@ -21,13 +21,8 @@ class TranslationsController < ApplicationController
     @form = Translation.new(text: text)
 
     if text
-      # translation = Dictionary.translate(text)
-      # @translation = TranslationDecorator.new(translation)
-
-      if user_signed_in?
-        translation = current_user.dictionary.translate(text)
-        @translation = TranslationDecorator.new(translation)
-      end
+      translation = current_or_guest_user.dictionary.translate(text)
+      @translation = TranslationDecorator.new(translation)
     end
 
     if user_signed_in?
