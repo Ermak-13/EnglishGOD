@@ -1,4 +1,4 @@
-require 'capybara_spec_helper'
+require 'spec_helper'
 
 feature 'Visit start page' do
   scenario 'unathorized user' do

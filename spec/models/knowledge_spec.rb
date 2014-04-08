@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Knowledge do
-  describe '.valid method' do
+  describe '.validate method' do
     before :each do
       @valid_attributes = {
         translation_id: 1,
@@ -14,7 +14,7 @@ describe Knowledge do
 
     it 'should be valid' do
       knowledge = Knowledge.new(@valid_attributes)
-      knowledge.valid?().should eq(true)
+      knowledge.valid?().should be_true
     end
 
     it 'should be invalid' do
@@ -29,7 +29,7 @@ describe Knowledge do
 
       situations.each do |situation|
         knowledge = Knowledge.new(@valid_attributes.merge(situation))
-        knowledge.valid?().should eq(false)
+        knowledge.valid?().should be_false
       end
     end
   end
