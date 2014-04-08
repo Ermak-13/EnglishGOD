@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     def current_or_guest_user()
       current_user || User.find_by_role(User::ROLES.fetch(:guest))
     end
+
+    def current_dictionary()
+      current_or_guest_user.dictionary
+    end
 end

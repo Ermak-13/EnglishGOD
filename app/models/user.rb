@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :translations, through: :knowledges
   has_one :dictionary
 
+  default_scope { includes(:dictionary) }
+
   validates :role, presence: true
 
   private

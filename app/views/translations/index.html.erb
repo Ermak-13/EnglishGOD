@@ -47,7 +47,7 @@
   <% end %>
 
   <% if user_signed_in? %>
-    <%= render partial: 'translations', locals: {translations: @translations} %>
+    <%= render partial: 'knowledges', locals: {knowledges: @knowledges} %>
   <% else %>
     <div id="info-for-unauthorized-user" class="alert alert-info">
       You can save translated words if you are authorized.

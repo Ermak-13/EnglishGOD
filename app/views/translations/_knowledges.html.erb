@@ -1,0 +1,19 @@
+<div id="last-words">
+  <table class="table table-hover">
+    <tr>
+      <th>#</th>
+      <th>Egnlish</th>
+      <th>Russian</th>
+      <th>Context</th>
+    </tr>
+    <% knowledges.each_with_index do |knowledge, i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= knowledge.translation.text %></td>
+        <td><%= knowledge.translation.value %></td>
+        <!-- TODO -->
+        <td><span class="temp">bla-bla-bla</span></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -5,6 +5,8 @@ class Knowledge < ActiveRecord::Base
   belongs_to :dictionary
   belongs_to :user
 
+  default_scope { includes(:translation) }
+
   validates :translation_id, presence: true
   validates :user_id, presence: true
   validates :dictionary_id, presence: true

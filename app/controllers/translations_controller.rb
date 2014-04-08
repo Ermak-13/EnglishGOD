@@ -1,20 +1,3 @@
-class TranslationDecorator < SimpleDelegator
-  def value()
-    @delegate_sd_obj.value['sentences'][0]['trans']
-  end
-
-  def probable_values()
-    probable_values = {}
-    if @delegate_sd_obj.value['dict']
-      @delegate_sd_obj.value['dict'].each do |i|
-        probable_values[i['pos']] = i['terms']
-      end
-    end
-
-    probable_values
-  end
-end
-
 class TranslationsController < ApplicationController
   def index
     text = params[:text]
@@ -26,9 +9,9 @@ class TranslationsController < ApplicationController
     end
 
     if user_signed_in?
-      translations = current_user.translations.order('created_at DESC').limit(10)
-      @translations = translations.map do |translation|
-        TranslationDecorator.new(translation)
+      knowledges = current_user.knowledges.order('created_at DESC').limit(10)
+      @knowledges = knowledges.map do |knowledge|
+        KnowledgeDecorator.new(knowledge)
       end
     end
   end
